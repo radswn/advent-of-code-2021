@@ -1,0 +1,144 @@
+TO INCREMENT :VAR
+MAKE :VAR (THING :VAR)+1
+END
+
+TO DECREMENT :VAR
+MAKE :VAR (THING :VAR)-1
+END
+
+MAKE "lines 1000
+MAKE "length 12
+MAKE "filename "input.txt
+
+MAKE "oxygenCount ARRAY :length
+MAKE "coCount ARRAY :length
+MAKE "words ARRAY :lines
+
+OPENREAD :filename
+SETREAD :filename
+
+REPEAT :lines [
+        MAKE "word ITEM 1 READLIST
+        SETITEM REPCOUNT :words :word
+]
+
+MAKE "wordsList ARRAYTOLIST :words
+
+MAKE "oxygen ARRAYTOLIST :words
+MAKE "co ARRAYTOLIST :words
+MAKE "oxygenBackup ARRAYTOLIST :words
+MAKE "coBackup ARRAYTOLIST :words
+
+REPEAT :length [
+        MAKE "oxygen :oxygenBackup
+        MAKE "co :coBackup
+        MAKE "i REPCOUNT
+        MAKE "oxygenLength COUNT :oxygen
+        MAKE "coLength COUNT :co
+        MAKE "oxygenFiltered []
+        MAKE "coFiltered []
+        
+        PRINT :oxygenLength
+        PRINT :coLength
+
+        REPEAT :length [
+                SETITEM REPCOUNT :oxygenCount 0
+                SETITEM REPCOUNT :coCount 0
+        ]
+
+        IF :oxygenLength>1[
+                WHILE [NOT EMPTYP :oxygen] [
+                        MAKE "word FIRST :oxygen
+                        MAKE "char ITEM :i :word
+
+                        IF :char=1 [
+                                MAKE "current ITEM :i :oxygenCount
+                                INCREMENT "current
+                                SETITEM :i :oxygenCount :current
+                        ]
+                        MAKE "oxygen REMOVE :word :oxygen
+                ]
+                
+                WHILE [NOT EMPTYP :oxygenBackup] [
+                        MAKE "word FIRST :oxygenBackup
+                        MAKE "char ITEM :i :word
+                        MAKE "counter ITEM :i :oxygenCount
+
+                        IFELSE [OR :counter>(:oxygenLength/2) :counter=(:oxygenLength/2)] [
+                                IF :char=1 [
+                                        MAKE "oxygenFiltered LPUT :word :oxygenFiltered
+                                ]
+                        ][
+                                IF :char=0 [
+                                        MAKE "oxygenFiltered LPUT :word :oxygenFiltered
+                                ]
+                        ]
+
+                        MAKE "oxygenBackup REMOVE :word :oxygenBackup
+                ]
+                MAKE "oxygenBackup :oxygenFiltered
+        ]
+        
+        IF :coLength>1[
+                WHILE [NOT EMPTYP :co] [
+                        MAKE "word FIRST :co
+                        MAKE "char ITEM :i :word
+
+                        IF :char=1 [
+                                MAKE "current ITEM :i :coCount
+                                INCREMENT "current
+                                SETITEM :i :coCount :current
+                        ]
+                        MAKE "co REMOVE :word :co
+                ]
+
+                WHILE [NOT EMPTYP :coBackup] [
+                        MAKE "word FIRST :coBackup
+                        MAKE "char ITEM :i :word
+                        MAKE "counter ITEM :i :coCount
+
+                        IFELSE [OR :counter>(:coLength/2) :counter=(:coLength/2)] [
+                                IF :char=0 [
+                                        MAKE "coFiltered LPUT :word :coFiltered
+                                ]
+                        ][
+                                IF :char=1 [
+                                        MAKE "coFiltered LPUT :word :coFiltered
+                                ]
+                        ]
+                        
+                        MAKE "coBackup REMOVE :word :coBackup
+                ]
+
+                MAKE "coBackup :coFiltered
+        ]
+]
+
+MAKE "power 1
+MAKE "i :length
+
+PRINT :oxygenBackup
+PRINT :coBackup
+
+MAKE "oxygenFinal ITEM 1 :oxygenBackup
+MAKE "coFinal ITEM 1 :coBackup
+
+MAKE "oxygen 0
+MAKE "co 0
+
+REPEAT :length [
+        MAKE "oxygenBit ITEM :i :oxygenFinal
+        MAKE "coBit ITEM :i :coFinal
+
+        IF :oxygenBit=1[
+                MAKE "oxygen :oxygen+:power
+        ]
+        IF :coBit=1[
+                MAKE "co :co+:power
+        ]
+
+        MAKE "power (:power)*2
+        DECREMENT "i
+]
+
+PRINT :co*:oxygen

@@ -1,0 +1,52 @@
+TO INCREMENT :VAR
+MAKE :VAR (THING :VAR)+1
+END
+
+TO DECREMENT :VAR
+MAKE :VAR (THING :VAR)-1
+END
+
+MAKE "lines 1000
+MAKE "length 12
+MAKE "filename "input.txt
+MAKE "count ARRAY :length
+
+REPEAT :length [
+        SETITEM REPCOUNT :count 0   
+]
+
+OPENREAD :filename
+SETREAD :filename
+REPEAT :lines [
+        MAKE "word ITEM 1 READLIST
+        
+        REPEAT :length [
+                MAKE "char ITEM REPCOUNT :word
+                
+                IF :char=1 [
+                        MAKE "current ITEM REPCOUNT :count
+                        INCREMENT "current
+                        SETITEM REPCOUNT :count :current
+                ]
+        ]
+]
+
+MAKE "power 1
+MAKE "i :length
+MAKE "gamma 0
+MAKE "epsilon 0
+
+REPEAT :length [
+        MAKE "value ITEM :i :count
+
+        IFELSE :value>(:lines/2) [
+                MAKE "gamma :gamma+:power
+        ][
+                MAKE "epsilon :epsilon+:power
+        ]
+        
+        MAKE "power (:power)*2
+        DECREMENT "i
+]
+
+PRINT :gamma*:epsilon

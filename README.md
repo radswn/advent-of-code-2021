@@ -7,7 +7,7 @@ Even though it is my first adventure with [Advent of Code](https://adventofcode.
 ## Progress so far
 * Day 1 - Go
 * Day 2 - Bash script
-* Day 3 -
+* Day 3 - UCBLogo (that took a while)
 * Day 4 -
 * Day 5 -
 * Day 6 -
