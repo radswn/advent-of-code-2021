@@ -5,28 +5,9 @@ Even though it is my first adventure with [Advent of Code](https://adventofcode.
 ![very funny maymay.jpg](https://pics.me.me/this-will-make-a-fine-addition-to-my-collection-when-60167180.png)
 
 ## Progress so far
-* Day 1 - Go
-* Day 2 - Bash script
-* Day 3 - UCBLogo (that took a while)
-* Day 4 -
-* Day 5 -
-* Day 6 -
-* Day 7 -
-* Day 8 -
-* Day 9 -
-* Day 10 -
-* Day 11 -
-* Day 12 -
-* Day 13 -
-* Day 14 -
-* Day 15 -
-* Day 16 -
-* Day 17 -
-* Day 18 -
-* Day 19 -
-* Day 20 -
-* Day 21 -
-* Day 22 -
-* Day 23 -
-* Day 24 -
-* Day 25 -
+### Day 1 - Go
+The first day surprised me with how easy the task was. Working with Golang turned out to be rather easy and intuitive.
+### Day 2 - Bash script
+Honestly, I was scared of Bash at first from previous classes at my university. However, Bash turned out to *not be as black as it is painted*. I suppose the task was easy enough to not feel any unbearable pain while coding.
+### Day 3 - UCBLogo
+Dear God, that was hard as fuck. I found little to no help on the Internet and spent almost whole day learning about assigning/retrieving values to/from arrays and lists. The syntax is very old-fashioned, like really *assembly-old-fashioned* in my opinion. The errors don't help you shit. Error codes are mentioned in the manual, *cool*, but could you like give me any hint what those mean, like wtf? You can imagine my satisfaction and relief when the second task finally worked as intended.
